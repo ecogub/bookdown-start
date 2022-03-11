@@ -1,6 +1,5 @@
 book_filename: "bookdown-start"
 chapter_name: "Chapter "
-repo: https://github.com/seankross/bookdown-start
 output_dir: docs
 rmd_files: ["index.Rmd", "01_markdown_examples.Rmd", "src/02_Hayman_Fire_Recovery.Rmd", "03_snow_data.Rmd",
 "04_spatial_analysis.Rmd", "05_lake_wq_analysis.Rmd", "06_corn_regressions.Rmd"]
