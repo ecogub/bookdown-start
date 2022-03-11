@@ -1,0 +1,231 @@
+---
+title: "Hayman Fire Recovery"
+author: "Nick Gubbins"
+date: "2/4/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, warning=F,message=F}
+library(tidyverse)
+library(tidyr)
+library(ggthemes)
+library(lubridate)
+library(kableExtra)
+
+# Now that we have learned how to munge (manipulate) data
+# and plot it, we will work on using these skills in new ways
+
+knitr::opts_knit$set(root.dir='..')
+```
+
+# Hayman Fire Recovery
+
+## Loading in data
+
+```{r dataread, warning=F,message=F}
+setwd('C:/Users/gubbi/Dropbox/ESS580A7/bookdown')
+####-----Reading in Data and Stacking it ----- ####
+#Reading in files
+files <- list.files('data',full.names=T)
+
+
+#Read in individual data files
+ndmi <- read_csv(files[1]) %>% 
+  rename(burned=2,unburned=3) %>%
+  mutate(data='ndmi')
+
+
+ndsi <- read_csv(files[2]) %>% 
+  rename(burned=2,unburned=3) %>%
+  mutate(data='ndsi')
+
+ndvi <- read_csv(files[3])%>% 
+  rename(burned=2,unburned=3) %>%
+  mutate(data='ndvi')
+
+# Stack as a tidy dataset
+full_long <- rbind(ndvi,ndmi,ndsi) %>%
+  gather(key='site',value='value',-DateTime,-data) %>%
+  filter(!is.na(value))
+
+
+```
+
+## Assignment
+
+### Q1 
+
+What is the correlation between NDVI and NDMI? - here I want you to
+convert the full_long dataset in to a wide dataset using the 
+function "spread" and then make a plot that shows the correlations a
+function of if the site was burned or not (x axis should be ndmi)
+You should exclude winter months and focus on summer months
+
+```{r,warning=FALSE,message=FALSE}
+jja_wide <- full_long %>%
+  pivot_wider(id_cols = c(DateTime, site),
+              names_from = data,
+              values_from = value) %>%
+  mutate(month = month(DateTime)) %>%
+  filter(month %in% c(6,7,8))
+
+ggplot(jja_wide, aes(x = ndmi, y = ndvi, color = site))+
+  geom_jitter()+
+  geom_smooth(method = 'lm')+
+  labs(x = 'NDMI', y = 'NDVI', color = 'Condition',
+       title = 'Summertime Remotely Sensed Production')
+```
+
+NDMI is used to detect water in vegetation. NDVI detects the reflection of green light. Differences in plant cover respond to both measures uniquely. They are strongly correlated to each other as both are proxies of vegetative biomass.
+
+### Q2 
+
+2) What is the correlation between average NDSI (normalized
+ snow index) for January - April and average NDVI for June-August?
+In other words, does the previous year's snow cover influence vegetation
+ growth for the following summer?
+ 
+```{r, warning=F,message=F}
+seasonal <- full_long %>%
+  mutate(month = month(DateTime),
+         flag = NA)
+
+seasonal$flag[seasonal$month %in% c(1,2,3)] <- 'Winter'
+seasonal$flag[seasonal$month %in% c(6,7,8)] <- 'Summer'
+
+seasonal_long <- seasonal %>%
+  filter(flag %in% c('Winter','Summer')) %>%
+  pivot_wider(id_cols = c(DateTime, site, flag),
+              names_from = data,
+              values_from = value) %>%
+  mutate(year = year(DateTime)) %>%
+  group_by(flag, year) %>%
+  summarize(ndsi_mean = mean(ndsi),
+            ndvi_mean = mean(ndvi)) %>%
+  pivot_wider(id_cols = year,
+              names_from = flag,
+              values_from = c(ndsi_mean, ndvi_mean))
+
+ggplot(seasonal_long, aes(x = ndsi_mean_Winter, y = ndvi_mean_Summer))+
+  geom_point()+
+  labs(x = 'NDSI (seasonal mean)',
+       y = 'NDVI (seasonal mean)')
+
+```
+
+There is a positive correlation between increased winter snowpack and summertime vegetation growth.
+
+### Q3
+
+How is the snow effect from question 2 different between pre- and post-burn
+and burned and unburned? 
+
+```{r, warning=F,message=F}
+seasonal_long2 <- seasonal %>%
+  filter(flag %in% c('Winter','Summer')) %>%
+  pivot_wider(id_cols = c(DateTime, site, flag),
+              names_from = data,
+              values_from = value) %>% 
+  mutate(year = year(DateTime)) %>%
+  group_by(flag, year, site) %>%
+  summarize(ndsi_mean = mean(ndsi),
+            ndvi_mean = mean(ndvi),
+            site = site) %>%
+  unique() %>%
+  pivot_wider(id_cols = c(year, site),
+              names_from = flag,
+              values_from = c(ndsi_mean, ndvi_mean)) %>%
+  select(site, year, ndsi_mean_Winter, ndvi_mean_Summer) %>%
+  na.omit() %>%
+  filter(year>2001)
+
+ggplot(seasonal_long2, aes(x = ndsi_mean_Winter, y = ndvi_mean_Summer, color = site))+
+  geom_point()+
+  labs(x = 'NDSI (winter mean)',
+       y = 'NDVI (summer mean)',
+       title = 'Burned vs Unburned',
+       color = 'Condition')+
+  stat_smooth(method = 'lm')
+
+```
+
+
+```{r, warning=F,message=F}
+seasonal_long3 <- seasonal %>%
+  filter(flag %in% c('Winter','Summer')) %>%
+  pivot_wider(id_cols = c(DateTime, site, flag),
+              names_from = data,
+              values_from = value) %>% 
+  mutate(year = year(DateTime)) %>%
+  group_by(flag, year, site) %>%
+  summarize(ndsi_mean = mean(ndsi),
+            ndvi_mean = mean(ndvi)) %>%
+  unique() %>%
+  pivot_wider(id_cols = c(year, site),
+              names_from = flag,
+              values_from = c(ndsi_mean, ndvi_mean)) %>%
+  select(site, year, ndsi_mean_Winter, ndvi_mean_Summer) %>%
+  na.omit() %>%
+  select(-site) %>%
+  group_by(year) %>%
+  summarize(ndsi_mean_Winter = mean(ndsi_mean_Winter),
+            ndvi_mean_Summer = mean(ndvi_mean_Summer)) %>%
+  mutate(Timing = 'Pre Fire')
+
+seasonal_long3$Timing[seasonal_long3$year>2001] <- 'Post Fire'
+
+
+ggplot(seasonal_long3, aes(x = ndsi_mean_Winter, y = ndvi_mean_Summer, color = Timing))+
+  geom_point()+
+  labs(x = 'NDSI (winter mean)',
+       y = 'NDVI (summer mean)',
+       title = 'Pre vs Post Fire',
+       color = 'Condition')+
+  stat_smooth(method = 'lm')
+```
+
+
+### Q4
+
+What month is the greenest month on average? 
+
+```{r, warning=F,message=F}
+seasonal %>%
+  select(-flag) %>%
+  pivot_wider(id_cols = c(DateTime, site, month),
+              names_from = data,
+              values_from = value) %>%
+  select(month, ndvi) %>%
+  na.omit() %>%
+  group_by(month) %>%
+  summarize('Mean NDVI' = mean(ndvi)) %>%
+  kbl()%>%
+  kable_styling()
+```
+
+August is the greenest month on average.
+
+### Q5 
+
+What month is the snowiest on average?
+
+```{r, warning=F,message=F}
+seasonal %>%
+  select(-flag) %>%
+  pivot_wider(id_cols = c(DateTime, site, month),
+              names_from = data,
+              values_from = value) %>%
+  select(month, ndsi) %>%
+  na.omit() %>%
+  group_by(month) %>%
+  summarize('Mean NDSI' = mean(ndsi)) %>%
+  kbl()%>%
+  kable_styling()
+```
+
+January is the snowiest month on average.
+
+
+

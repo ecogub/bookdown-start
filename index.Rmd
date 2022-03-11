@@ -12,4 +12,11 @@ description: "A recap of what I learned in ESS580A7."
 
 # Preface {-}
 
-This is the very first part of the book.
+This book is a compilation of the work I performed in ESS580A7 during the spring
+of 2022. Much of the code making up the demos and their associated assignments 
+have been written by Matthew Ross and Nathan Mueller, the instructors of the 
+course. 
+
+Help for getting started with this bookdown came from [Sean Kross's Github.](https://github.com/seankross/bookdown-start)
+
+Each course assignment forms a chapter in this bookdown.

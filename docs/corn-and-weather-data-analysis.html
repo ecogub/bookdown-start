@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Corn and Weather Data Analysis | Weather and Corn Yield Regressions</title>
+  <meta name="description" content="A recap of what I learned in ESS580A7." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Corn and Weather Data Analysis | Weather and Corn Yield Regressions" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A recap of what I learned in ESS580A7." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Corn and Weather Data Analysis | Weather and Corn Yield Regressions" />
+  
+  <meta name="twitter:description" content="A recap of what I learned in ESS580A7." />
+  
+
+<meta name="author" content="Nick Gubbins" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lagos-analysis.html"/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Bookdown Book</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html"><i class="fa fa-check"></i><b>1</b> R markdown Examples</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#methods"><i class="fa fa-check"></i><b>1.1</b> Methods</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#sitedescription"><i class="fa fa-check"></i><b>1.1.1</b> SiteDescription</a></li>
+<li class="chapter" data-level="1.1.2" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#data-acquisition-and-plotting-tests"><i class="fa fa-check"></i><b>1.1.2</b> Data Acquisition and Plotting tests</a></li>
+<li class="chapter" data-level="1.1.3" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#data-download"><i class="fa fa-check"></i><b>1.1.3</b> Data Download</a></li>
+<li class="chapter" data-level="1.1.4" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#static-data-plotter"><i class="fa fa-check"></i><b>1.1.4</b> Static Data Plotter</a></li>
+<li class="chapter" data-level="1.1.5" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#interactive-data-plotter"><i class="fa fa-check"></i><b>1.1.5</b> Interactive Data Plotter</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="r-markdown-examples.html"><a href="r-markdown-examples.html#assignment"><i class="fa fa-check"></i><b>1.2</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html"><i class="fa fa-check"></i><b>2</b> Hayman Fire Recovery</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#loading-in-data"><i class="fa fa-check"></i><b>2.1</b> Loading in data</a></li>
+<li class="chapter" data-level="2.2" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#assignment-1"><i class="fa fa-check"></i><b>2.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#q1"><i class="fa fa-check"></i><b>2.2.1</b> Q1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#q2"><i class="fa fa-check"></i><b>2.2.2</b> Q2</a></li>
+<li class="chapter" data-level="2.2.3" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#q3"><i class="fa fa-check"></i><b>2.2.3</b> Q3</a></li>
+<li class="chapter" data-level="2.2.4" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#q4"><i class="fa fa-check"></i><b>2.2.4</b> Q4</a></li>
+<li class="chapter" data-level="2.2.5" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#q5"><i class="fa fa-check"></i><b>2.2.5</b> Q5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="snow-data.html"><a href="snow-data.html"><i class="fa fa-check"></i><b>3</b> Snow Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="snow-data.html"><a href="snow-data.html#simple-web-scraping"><i class="fa fa-check"></i><b>3.1</b> Simple web scraping</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="snow-data.html"><a href="snow-data.html#reading-an-html"><i class="fa fa-check"></i><b>3.1.1</b> Reading an html</a></li>
+<li class="chapter" data-level="3.1.2" data-path="snow-data.html"><a href="snow-data.html#data-download-1"><i class="fa fa-check"></i><b>3.1.2</b> Data Download</a></li>
+<li class="chapter" data-level="3.1.3" data-path="snow-data.html"><a href="snow-data.html#data-read-in"><i class="fa fa-check"></i><b>3.1.3</b> Data read-in</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="snow-data.html"><a href="snow-data.html#assignment-2"><i class="fa fa-check"></i><b>3.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="snow-data.html"><a href="snow-data.html#q1-1"><i class="fa fa-check"></i><b>3.2.1</b> Q1</a></li>
+<li class="chapter" data-level="3.2.2" data-path="snow-data.html"><a href="snow-data.html#q2-1"><i class="fa fa-check"></i><b>3.2.2</b> Q2</a></li>
+<li class="chapter" data-level="3.2.3" data-path="snow-data.html"><a href="snow-data.html#q3-1"><i class="fa fa-check"></i><b>3.2.3</b> Q3</a></li>
+<li class="chapter" data-level="3.2.4" data-path="snow-data.html"><a href="snow-data.html#q4-1"><i class="fa fa-check"></i><b>3.2.4</b> Q4</a></li>
+<li class="chapter" data-level="3.2.5" data-path="snow-data.html"><a href="snow-data.html#q5-1"><i class="fa fa-check"></i><b>3.2.5</b> Q5</a></li>
+<li class="chapter" data-level="3.2.6" data-path="snow-data.html"><a href="snow-data.html#q6"><i class="fa fa-check"></i><b>3.2.6</b> Q6</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html"><i class="fa fa-check"></i><b>4</b> Beginner LAGOS Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#loading-in-data-1"><i class="fa fa-check"></i><b>4.1</b> Loading in data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#first-download-and-then-specifically-grab-the-locus-or-site-lat-longs"><i class="fa fa-check"></i><b>4.1.1</b> First download and then specifically grab the locus (or site lat longs)</a></li>
+<li class="chapter" data-level="4.1.2" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#convert-to-spatial-data"><i class="fa fa-check"></i><b>4.1.2</b> Convert to spatial data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#subset-to-only-minnesota"><i class="fa fa-check"></i><b>4.1.3</b> Subset to only Minnesota</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#assignment-3"><i class="fa fa-check"></i><b>4.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#q1-2"><i class="fa fa-check"></i><b>4.2.1</b> Q1</a></li>
+<li class="chapter" data-level="4.2.2" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#q2-2"><i class="fa fa-check"></i><b>4.2.2</b> Q2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#q3-2"><i class="fa fa-check"></i><b>4.2.3</b> Q3</a></li>
+<li class="chapter" data-level="4.2.4" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#q4-2"><i class="fa fa-check"></i><b>4.2.4</b> Q4</a></li>
+<li class="chapter" data-level="4.2.5" data-path="beginner-lagos-analysis.html"><a href="beginner-lagos-analysis.html#q5-2"><i class="fa fa-check"></i><b>4.2.5</b> Q5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lagos-analysis.html"><a href="lagos-analysis.html"><i class="fa fa-check"></i><b>5</b> LAGOS Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lagos-analysis.html"><a href="lagos-analysis.html#loading-in-data-2"><i class="fa fa-check"></i><b>5.1</b> Loading in data</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lagos-analysis.html"><a href="lagos-analysis.html#first-download-and-then-specifically-grab-the-locus-or-site-lat-longs-1"><i class="fa fa-check"></i><b>5.1.1</b> First download and then specifically grab the locus (or site lat longs)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="lagos-analysis.html"><a href="lagos-analysis.html#subset-columns-nutr-to-only-keep-key-info-that-we-want"><i class="fa fa-check"></i><b>5.1.2</b> Subset columns nutr to only keep key info that we want</a></li>
+<li class="chapter" data-level="5.1.3" data-path="lagos-analysis.html"><a href="lagos-analysis.html#keep-sites-with-at-least-200-observations"><i class="fa fa-check"></i><b>5.1.3</b> Keep sites with at least 200 observations</a></li>
+<li class="chapter" data-level="5.1.4" data-path="lagos-analysis.html"><a href="lagos-analysis.html#join-water-quality-data-to-spatial-data"><i class="fa fa-check"></i><b>5.1.4</b> Join water quality data to spatial data</a></li>
+<li class="chapter" data-level="5.1.5" data-path="lagos-analysis.html"><a href="lagos-analysis.html#mean-chl_a-map"><i class="fa fa-check"></i><b>5.1.5</b> Mean Chl_a map</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="lagos-analysis.html"><a href="lagos-analysis.html#assignment-4"><i class="fa fa-check"></i><b>5.2</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="lagos-analysis.html"><a href="lagos-analysis.html#q1-3"><i class="fa fa-check"></i><b>5.2.1</b> Q1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="lagos-analysis.html"><a href="lagos-analysis.html#q2-3"><i class="fa fa-check"></i><b>5.2.2</b> Q2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="lagos-analysis.html"><a href="lagos-analysis.html#q3-3"><i class="fa fa-check"></i><b>5.2.3</b> Q3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Corn and Weather Data Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#loading-in-data-3"><i class="fa fa-check"></i><b>6.1</b> Loading in data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#load-the-prism-daily-maximum-temperatures"><i class="fa fa-check"></i><b>6.1.1</b> Load the PRISM daily maximum temperatures</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#investigating-temperature-trends"><i class="fa fa-check"></i><b>6.2</b> Investigating temperature trends</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#summer-temperature-trends-winneshiek-county"><i class="fa fa-check"></i><b>6.2.1</b> Summer temperature trends: Winneshiek County</a></li>
+<li class="chapter" data-level="6.2.2" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#winter-temperatures---winneshiek-county"><i class="fa fa-check"></i><b>6.2.2</b> Winter Temperatures - Winneshiek County</a></li>
+<li class="chapter" data-level="6.2.3" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#multiple-regression-quadratic-time-trend"><i class="fa fa-check"></i><b>6.2.3</b> Multiple regression – Quadratic time trend</a></li>
+<li class="chapter" data-level="6.2.4" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#download-nass-corn-yield-data"><i class="fa fa-check"></i><b>6.2.4</b> Download NASS corn yield data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#assignment-5"><i class="fa fa-check"></i><b>6.3</b> Assignment</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#q1-4"><i class="fa fa-check"></i><b>6.3.1</b> Q1</a></li>
+<li class="chapter" data-level="6.3.2" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#q2-4"><i class="fa fa-check"></i><b>6.3.2</b> Q2</a></li>
+<li class="chapter" data-level="6.3.3" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#q3-4"><i class="fa fa-check"></i><b>6.3.3</b> Q3</a></li>
+<li class="chapter" data-level="6.3.4" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#q4-3"><i class="fa fa-check"></i><b>6.3.4</b> Q4</a></li>
+<li class="chapter" data-level="6.3.5" data-path="corn-and-weather-data-analysis.html"><a href="corn-and-weather-data-analysis.html#q5-3"><i class="fa fa-check"></i><b>6.3.5</b> Q5</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Weather and Corn Yield Regressions</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="corn-and-weather-data-analysis" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Corn and Weather Data Analysis</h1>
+<div id="loading-in-data-3" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Loading in data</h2>
+<div id="load-the-prism-daily-maximum-temperatures" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Load the PRISM daily maximum temperatures</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="corn-and-weather-data-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># daily max temperature</span></span>
+<span id="cb1-2"><a href="corn-and-weather-data-analysis.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dimensions: counties x days x years</span></span>
+<span id="cb1-3"><a href="corn-and-weather-data-analysis.html#cb1-3" aria-hidden="true" tabindex="-1"></a>prism <span class="ot">&lt;-</span> <span class="fu">readMat</span>(<span class="st">&quot;data/prismiowa.mat&quot;</span>)</span>
+<span id="cb1-4"><a href="corn-and-weather-data-analysis.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="corn-and-weather-data-analysis.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># look at county #1</span></span>
+<span id="cb1-6"><a href="corn-and-weather-data-analysis.html#cb1-6" aria-hidden="true" tabindex="-1"></a>t_1981_c1 <span class="ot">&lt;-</span> prism<span class="sc">$</span>tmaxdaily.iowa[<span class="dv">1</span>,,<span class="dv">1</span>]</span>
+<span id="cb1-7"><a href="corn-and-weather-data-analysis.html#cb1-7" aria-hidden="true" tabindex="-1"></a>t_1981_c1[<span class="dv">366</span>]</span></code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="corn-and-weather-data-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">366</span>, t_1981_c1, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/tmax%20data-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="corn-and-weather-data-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a href="corn-and-weather-data-analysis.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">366</span>, <span class="at">y =</span> t_1981_c1)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="corn-and-weather-data-analysis.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="corn-and-weather-data-analysis.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;day of year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="corn-and-weather-data-analysis.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;daily maximum temperature (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="corn-and-weather-data-analysis.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Daily Maximum Temperature, Iowa County #1&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 1 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="bookdown-start_files/figure-html/tmax%20data-2.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="corn-and-weather-data-analysis.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign dimension names to tmax matrix</span></span>
+<span id="cb6-2"><a href="corn-and-weather-data-analysis.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(prism<span class="sc">$</span>tmaxdaily.iowa) <span class="ot">&lt;-</span> <span class="fu">list</span>(prism<span class="sc">$</span>COUNTYFP, <span class="dv">1</span><span class="sc">:</span><span class="dv">366</span>, prism<span class="sc">$</span>years)</span>
+<span id="cb6-3"><a href="corn-and-weather-data-analysis.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="corn-and-weather-data-analysis.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># converted 3d matrix into a data frame</span></span>
+<span id="cb6-5"><a href="corn-and-weather-data-analysis.html#cb6-5" aria-hidden="true" tabindex="-1"></a>tmaxdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame.table</span>(prism<span class="sc">$</span>tmaxdaily.iowa)</span>
+<span id="cb6-6"><a href="corn-and-weather-data-analysis.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="corn-and-weather-data-analysis.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># relabel the columns</span></span>
+<span id="cb6-8"><a href="corn-and-weather-data-analysis.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tmaxdf) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;countyfp&quot;</span>,<span class="st">&quot;doy&quot;</span>,<span class="st">&quot;year&quot;</span>,<span class="st">&quot;tmax&quot;</span>)</span>
+<span id="cb6-9"><a href="corn-and-weather-data-analysis.html#cb6-9" aria-hidden="true" tabindex="-1"></a>tmaxdf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(tmaxdf)</span></code></pre></div>
+</div>
+</div>
+<div id="investigating-temperature-trends" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Investigating temperature trends</h2>
+<div id="summer-temperature-trends-winneshiek-county" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Summer temperature trends: Winneshiek County</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="corn-and-weather-data-analysis.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tmaxdf<span class="sc">$</span>doy <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tmaxdf<span class="sc">$</span>doy)</span>
+<span id="cb7-2"><a href="corn-and-weather-data-analysis.html#cb7-2" aria-hidden="true" tabindex="-1"></a>tmaxdf<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(tmaxdf<span class="sc">$</span>year))</span>
+<span id="cb7-3"><a href="corn-and-weather-data-analysis.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="corn-and-weather-data-analysis.html#cb7-4" aria-hidden="true" tabindex="-1"></a>winnesummer <span class="ot">&lt;-</span> tmaxdf <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="corn-and-weather-data-analysis.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(countyfp<span class="sc">==</span><span class="dv">191</span> <span class="sc">&amp;</span> doy <span class="sc">&gt;=</span> <span class="dv">152</span> <span class="sc">&amp;</span> doy <span class="sc">&lt;=</span> <span class="dv">243</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="corn-and-weather-data-analysis.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="corn-and-weather-data-analysis.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meantmax =</span> <span class="fu">mean</span>(tmax))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="corn-and-weather-data-analysis.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(winnesummer, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> meantmax)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="corn-and-weather-data-analysis.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="corn-and-weather-data-analysis.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="corn-and-weather-data-analysis.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="corn-and-weather-data-analysis.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdown-start_files/figure-html/temp%20trends-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="corn-and-weather-data-analysis.html#cb11-1" aria-hidden="true" tabindex="-1"></a>lm_summertmax <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantmax <span class="sc">~</span> year, winnesummer)</span>
+<span id="cb11-2"><a href="corn-and-weather-data-analysis.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_summertmax)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = meantmax ~ year, data = winnesummer)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.5189 -0.7867 -0.0341  0.6859  3.7415 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 41.57670   36.44848   1.141    0.262
+## year        -0.00747    0.01823  -0.410    0.684
+## 
+## Residual standard error: 1.232 on 36 degrees of freedom
+## Multiple R-squared:  0.004644,   Adjusted R-squared:  -0.02301 
+## F-statistic: 0.168 on 1 and 36 DF,  p-value: 0.6844</code></pre>
+</div>
+<div id="winter-temperatures---winneshiek-county" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Winter Temperatures - Winneshiek County</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="corn-and-weather-data-analysis.html#cb13-1" aria-hidden="true" tabindex="-1"></a>winnewinter <span class="ot">&lt;-</span> tmaxdf <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="corn-and-weather-data-analysis.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(countyfp<span class="sc">==</span><span class="dv">191</span> <span class="sc">&amp;</span> doy <span class="sc">&lt;=</span> <span class="dv">59</span> <span class="sc">|</span> doy <span class="sc">&gt;=</span> <span class="dv">335</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(tmax)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="corn-and-weather-data-analysis.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="corn-and-weather-data-analysis.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meantmax =</span> <span class="fu">mean</span>(tmax))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="corn-and-weather-data-analysis.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(winnewinter, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> meantmax)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="corn-and-weather-data-analysis.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="corn-and-weather-data-analysis.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="corn-and-weather-data-analysis.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="corn-and-weather-data-analysis.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="bookdown-start_files/figure-html/winter%20temps-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="corn-and-weather-data-analysis.html#cb17-1" aria-hidden="true" tabindex="-1"></a>lm_wintertmax <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantmax <span class="sc">~</span> year, winnewinter)</span>
+<span id="cb17-2"><a href="corn-and-weather-data-analysis.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_wintertmax)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = meantmax ~ year, data = winnewinter)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.0748 -2.6494  0.7715  2.2172  4.1361 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -119.10546   94.08124  -1.266    0.214
+## year           0.05960    0.04705   1.267    0.213
+## 
+## Residual standard error: 3.181 on 36 degrees of freedom
+## Multiple R-squared:  0.04267,    Adjusted R-squared:  0.01608 
+## F-statistic: 1.605 on 1 and 36 DF,  p-value: 0.2134</code></pre>
+</div>
+<div id="multiple-regression-quadratic-time-trend" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Multiple regression – Quadratic time trend</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="corn-and-weather-data-analysis.html#cb19-1" aria-hidden="true" tabindex="-1"></a>winnewinter<span class="sc">$</span>yearsq <span class="ot">&lt;-</span> winnewinter<span class="sc">$</span>year<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb19-2"><a href="corn-and-weather-data-analysis.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="corn-and-weather-data-analysis.html#cb19-3" aria-hidden="true" tabindex="-1"></a>lm_wintertmaxquad <span class="ot">&lt;-</span> <span class="fu">lm</span>(meantmax <span class="sc">~</span> year <span class="sc">+</span> yearsq, winnewinter)</span>
+<span id="cb19-4"><a href="corn-and-weather-data-analysis.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_wintertmaxquad)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = meantmax ~ year + yearsq, data = winnewinter)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -7.680 -2.813  0.640  2.264  4.072 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -1.049e+04  1.939e+04  -0.541    0.592
+## year         1.043e+01  1.940e+01   0.538    0.594
+## yearsq      -2.594e-03  4.851e-03  -0.535    0.596
+## 
+## Residual standard error: 3.213 on 35 degrees of freedom
+## Multiple R-squared:  0.05043,    Adjusted R-squared:  -0.003832 
+## F-statistic: 0.9294 on 2 and 35 DF,  p-value: 0.4043</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="corn-and-weather-data-analysis.html#cb21-1" aria-hidden="true" tabindex="-1"></a>winnewinter<span class="sc">$</span>fitted <span class="ot">&lt;-</span> lm_wintertmaxquad<span class="sc">$</span>fitted.values</span>
+<span id="cb21-2"><a href="corn-and-weather-data-analysis.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="corn-and-weather-data-analysis.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(winnewinter) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="corn-and-weather-data-analysis.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> meantmax)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="corn-and-weather-data-analysis.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> fitted)) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="corn-and-weather-data-analysis.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-7"><a href="corn-and-weather-data-analysis.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;tmax&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/quadratic%20temp%20trend-1.png" width="672" /></p>
+</div>
+<div id="download-nass-corn-yield-data" class="section level3" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Download NASS corn yield data</h3>
+</div>
+</div>
+<div id="assignment-5" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Assignment</h2>
+<div id="q1-4" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Q1</h3>
+<div id="part-a-2" class="section level4" number="6.3.1.1">
+<h4><span class="header-section-number">6.3.1.1</span> Part A</h4>
+<p>Extract Winneshiek County corn yields, fit a linear time trend, make a plot. Is there a significant time trend</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="corn-and-weather-data-analysis.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#glimpse(cornyields)</span></span>
+<span id="cb22-2"><a href="corn-and-weather-data-analysis.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="corn-and-weather-data-analysis.html#cb25-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> cornyields <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="corn-and-weather-data-analysis.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county_name <span class="sc">==</span> <span class="st">&quot;WINNESHIEK&quot;</span>)</span>
+<span id="cb25-3"><a href="corn-and-weather-data-analysis.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="corn-and-weather-data-analysis.html#cb25-4" aria-hidden="true" tabindex="-1"></a>m1a <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data, yield<span class="sc">~</span>year)</span>
+<span id="cb25-5"><a href="corn-and-weather-data-analysis.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1a)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ year, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -51.163  -1.841   2.363   9.437  24.376 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -4763.290    448.286  -10.63 4.46e-13 ***
+## year            2.457      0.224   10.96 1.77e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.97 on 39 degrees of freedom
+## Multiple R-squared:  0.7551, Adjusted R-squared:  0.7488 
+## F-statistic: 120.2 on 1 and 39 DF,  p-value: 1.767e-13</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="corn-and-weather-data-analysis.html#cb27-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="corn-and-weather-data-analysis.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(., <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> yield))<span class="sc">+</span></span>
+<span id="cb27-3"><a href="corn-and-weather-data-analysis.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb27-4"><a href="corn-and-weather-data-analysis.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb27-5"><a href="corn-and-weather-data-analysis.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Year&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Corn Yield (T)&#39;</span>, <span class="at">title=</span> <span class="st">&#39;Corn Yields in Winnesiek County&#39;</span>)</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Yes, there is a significant, postitive trend over time.</p>
+</div>
+<div id="part-b-2" class="section level4" number="6.3.1.2">
+<h4><span class="header-section-number">6.3.1.2</span> Part B</h4>
+<p>Fit a quadratic time trend (i.e., year + year^2) and make a plot. Is there evidence for slowing yield growth?</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="corn-and-weather-data-analysis.html#cb28-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>year_sq <span class="ot">&lt;-</span> data<span class="sc">$</span>year<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb28-2"><a href="corn-and-weather-data-analysis.html#cb28-2" aria-hidden="true" tabindex="-1"></a>m1b <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data, yield<span class="sc">~</span>year<span class="sc">+</span>year_sq)</span>
+<span id="cb28-3"><a href="corn-and-weather-data-analysis.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ year + year_sq, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -51.384  -3.115   1.388   9.743  25.324 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  2.583e+04  8.580e+04   0.301    0.765
+## year        -2.812e+01  8.576e+01  -0.328    0.745
+## year_sq      7.641e-03  2.143e-02   0.357    0.723
+## 
+## Residual standard error: 17.17 on 38 degrees of freedom
+## Multiple R-squared:  0.7559, Adjusted R-squared:  0.7431 
+## F-statistic: 58.84 on 2 and 38 DF,  p-value: 2.311e-12</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="corn-and-weather-data-analysis.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m1b, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Yes, there is evidence that the trend is slowing in more recent years.</p>
+</div>
+</div>
+<div id="q2-4" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Q2</h3>
+<p>Time Series: Let’s analyze the relationship between temperature and yields for the Winneshiek County time series. Use data on yield and summer avg Tmax. Is adding year or Tmax^2 to your model helpful? Make a plot and interpret the results.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="corn-and-weather-data-analysis.html#cb31-1" aria-hidden="true" tabindex="-1"></a>data_t <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="corn-and-weather-data-analysis.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(., tmaxdf, <span class="at">by =</span> <span class="st">&#39;year&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="corn-and-weather-data-analysis.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.finite</span>(tmax))</span>
+<span id="cb31-4"><a href="corn-and-weather-data-analysis.html#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="corn-and-weather-data-analysis.html#cb31-5" aria-hidden="true" tabindex="-1"></a>m2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data_t, yield<span class="sc">~</span>tmax)</span>
+<span id="cb31-6"><a href="corn-and-weather-data-analysis.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2a)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ tmax, data = data_t)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -80.936 -23.710  -5.975  24.567  63.177 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.484e+02  4.263e-02 3480.55   &lt;2e-16 ***
+## tmax        4.011e-02  2.195e-03   18.28   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 32.52 on 1374019 degrees of freedom
+## Multiple R-squared:  0.000243,   Adjusted R-squared:  0.0002423 
+## F-statistic:   334 on 1 and 1374019 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="corn-and-weather-data-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(m2a)</span></span>
+<span id="cb33-2"><a href="corn-and-weather-data-analysis.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="corn-and-weather-data-analysis.html#cb33-3" aria-hidden="true" tabindex="-1"></a>data_t<span class="sc">$</span>tmax_sq <span class="ot">&lt;-</span> data_t<span class="sc">$</span>tmax<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb33-4"><a href="corn-and-weather-data-analysis.html#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="corn-and-weather-data-analysis.html#cb33-5" aria-hidden="true" tabindex="-1"></a>m2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data_t, yield<span class="sc">~</span>tmax<span class="sc">+</span>tmax_sq)</span>
+<span id="cb33-6"><a href="corn-and-weather-data-analysis.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ tmax + tmax_sq, data = data_t)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -80.439 -23.948  -3.084  24.585  66.333 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.484e+02  4.271e-02 3475.38   &lt;2e-16 ***
+## tmax         1.195e-01  4.766e-03   25.07   &lt;2e-16 ***
+## tmax_sq     -3.236e-03  1.725e-04  -18.76   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 32.51 on 1374018 degrees of freedom
+## Multiple R-squared:  0.0004991,  Adjusted R-squared:  0.0004976 
+## F-statistic: 343.1 on 2 and 1374018 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="corn-and-weather-data-analysis.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(m2b)</span></span>
+<span id="cb35-2"><a href="corn-and-weather-data-analysis.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="corn-and-weather-data-analysis.html#cb35-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_t,<span class="fu">aes</span>(<span class="at">x=</span>yield, <span class="at">y =</span> tmax)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="corn-and-weather-data-analysis.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bin2d</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span>
+<span id="cb35-5"><a href="corn-and-weather-data-analysis.html#cb35-5" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="corn-and-weather-data-analysis.html#cb36-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_t,<span class="fu">aes</span>(<span class="at">x=</span>yield, <span class="at">y =</span> tmax_sq)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="corn-and-weather-data-analysis.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bin2d</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="corn-and-weather-data-analysis.html#cb36-3" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>Yes, adding the square of max temperature improved our model somewhat.</p>
+</div>
+<div id="q3-4" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Q3</h3>
+<p>Cross-Section: Analyze the relationship between temperature and yield across all counties in 2018. Is there a relationship? Interpret the results.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="corn-and-weather-data-analysis.html#cb37-1" aria-hidden="true" tabindex="-1"></a>data3 <span class="ot">&lt;-</span> cornyields <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="corn-and-weather-data-analysis.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">countyfp =</span> <span class="fu">as.factor</span>(county_ansi)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="corn-and-weather-data-analysis.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(., tmaxdf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;year&#39;</span>, <span class="st">&#39;countyfp&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="corn-and-weather-data-analysis.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tmax_sq =</span> tmax<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb37-5"><a href="corn-and-weather-data-analysis.html#cb37-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">countyfp =</span> <span class="fu">as.factor</span>(countyfp))</span>
+<span id="cb37-6"><a href="corn-and-weather-data-analysis.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="corn-and-weather-data-analysis.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="at">data =</span> data3, yield<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>tmax<span class="sc">+</span>tmax_sq))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ 0 + tmax + tmax_sq, data = data3)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -219.85    0.64   56.64  122.33  316.59 
+## 
+## Coefficients:
+##          Estimate Std. Error t value Pr(&gt;|t|)    
+## tmax    4.8114193  0.0140746   341.9   &lt;2e-16 ***
+## tmax_sq 0.0323888  0.0005318    60.9   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 100.3 on 1368909 degrees of freedom
+##   (8248 observations deleted due to missingness)
+## Multiple R-squared:  0.5433, Adjusted R-squared:  0.5433 
+## F-statistic: 8.141e+05 on 2 and 1368909 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Yes,there is a positive relationship between max temperature and growth for the year, as indicated by the low p-value on our slope. However, max temperature only explains some of the variability in our data, as indicated by an r-squared value of 0.54.</p>
+</div>
+<div id="q4-3" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Q4</h3>
+<p>Panel: One way to leverage multiple time series is to group all data into what is called a “panel” regression. Convert the county ID code (“countyfp” or “county_ansi”) into factor using as.factor, then include this variable in a regression using all counties’ yield and summer temperature data. How does the significance of your temperature coefficients (Tmax, Tmax^2) change? Make a plot comparing actual and fitted yields and interpret the results of your model.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="corn-and-weather-data-analysis.html#cb39-1" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> data3, yield<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>tmax<span class="sc">+</span>tmax_sq<span class="sc">*</span>countyfp)</span>
+<span id="cb39-2"><a href="corn-and-weather-data-analysis.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ 0 + tmax + tmax_sq * countyfp, data = data3)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -114.867  -20.843   -0.896   24.560   85.493 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## tmax                 1.669e-01  4.890e-03  34.130  &lt; 2e-16 ***
+## tmax_sq             -5.883e-03  8.012e-04  -7.343 2.09e-13 ***
+## countyfp1            1.358e+02  4.210e-01 322.524  &lt; 2e-16 ***
+## countyfp3            1.315e+02  4.224e-01 311.266  &lt; 2e-16 ***
+## countyfp5            1.465e+02  4.063e-01 360.504  &lt; 2e-16 ***
+## countyfp7            1.161e+02  4.279e-01 271.275  &lt; 2e-16 ***
+## countyfp9            1.447e+02  4.176e-01 346.568  &lt; 2e-16 ***
+## countyfp11           1.484e+02  4.131e-01 359.227  &lt; 2e-16 ***
+## countyfp13           1.499e+02  4.106e-01 365.043  &lt; 2e-16 ***
+## countyfp15           1.543e+02  4.154e-01 371.320  &lt; 2e-16 ***
+## countyfp17           1.545e+02  4.092e-01 377.566  &lt; 2e-16 ***
+## countyfp19           1.508e+02  4.098e-01 368.055  &lt; 2e-16 ***
+## countyfp21           1.507e+02  4.110e-01 366.747  &lt; 2e-16 ***
+## countyfp23           1.513e+02  4.102e-01 368.926  &lt; 2e-16 ***
+## countyfp25           1.517e+02  4.129e-01 367.518  &lt; 2e-16 ***
+## countyfp27           1.497e+02  4.148e-01 360.912  &lt; 2e-16 ***
+## countyfp29           1.422e+02  4.209e-01 337.768  &lt; 2e-16 ***
+## countyfp31           1.562e+02  4.154e-01 376.160  &lt; 2e-16 ***
+## countyfp33           1.482e+02  4.064e-01 364.742  &lt; 2e-16 ***
+## countyfp35           1.550e+02  4.116e-01 376.667  &lt; 2e-16 ***
+## countyfp37           1.461e+02  4.074e-01 358.626  &lt; 2e-16 ***
+## countyfp39           1.102e+02  4.266e-01 258.357  &lt; 2e-16 ***
+## countyfp41           1.486e+02  4.080e-01 364.118  &lt; 2e-16 ***
+## countyfp43           1.522e+02  4.087e-01 372.459  &lt; 2e-16 ***
+## countyfp45           1.517e+02  4.139e-01 366.611  &lt; 2e-16 ***
+## countyfp47           1.470e+02  4.154e-01 353.831  &lt; 2e-16 ***
+## countyfp49           1.477e+02  4.173e-01 353.896  &lt; 2e-16 ***
+## countyfp51           1.171e+02  4.291e-01 272.870  &lt; 2e-16 ***
+## countyfp53           1.176e+02  4.286e-01 274.384  &lt; 2e-16 ***
+## countyfp55           1.530e+02  4.093e-01 373.928  &lt; 2e-16 ***
+## countyfp57           1.447e+02  4.221e-01 342.937  &lt; 2e-16 ***
+## countyfp59           1.454e+02  4.051e-01 358.849  &lt; 2e-16 ***
+## countyfp61           1.532e+02  4.083e-01 375.350  &lt; 2e-16 ***
+## countyfp63           1.506e+02  4.066e-01 370.470  &lt; 2e-16 ***
+## countyfp65           1.509e+02  4.086e-01 369.294  &lt; 2e-16 ***
+## countyfp67           1.482e+02  4.079e-01 363.333  &lt; 2e-16 ***
+## countyfp69           1.537e+02  4.087e-01 376.179  &lt; 2e-16 ***
+## countyfp71           1.396e+02  4.275e-01 326.454  &lt; 2e-16 ***
+## countyfp73           1.524e+02  4.157e-01 366.618  &lt; 2e-16 ***
+## countyfp75           1.537e+02  4.114e-01 373.530  &lt; 2e-16 ***
+## countyfp77           1.406e+02  4.176e-01 336.658  &lt; 2e-16 ***
+## countyfp79           1.538e+02  4.124e-01 372.910  &lt; 2e-16 ***
+## countyfp81           1.524e+02  4.067e-01 374.658  &lt; 2e-16 ***
+## countyfp83           1.550e+02  4.112e-01 376.930  &lt; 2e-16 ***
+## countyfp85           1.418e+02  4.198e-01 337.691  &lt; 2e-16 ***
+## countyfp87           1.387e+02  4.224e-01 328.402  &lt; 2e-16 ***
+## countyfp89           1.448e+02  4.049e-01 357.591  &lt; 2e-16 ***
+## countyfp91           1.530e+02  4.099e-01 373.361  &lt; 2e-16 ***
+## countyfp93           1.531e+02  4.135e-01 370.163  &lt; 2e-16 ***
+## countyfp95           1.457e+02  4.162e-01 350.158  &lt; 2e-16 ***
+## countyfp97           1.412e+02  4.107e-01 343.891  &lt; 2e-16 ***
+## countyfp99           1.526e+02  4.170e-01 365.949  &lt; 2e-16 ***
+## countyfp101          1.307e+02  4.214e-01 310.157  &lt; 2e-16 ***
+## countyfp103          1.430e+02  4.167e-01 343.104  &lt; 2e-16 ***
+## countyfp105          1.499e+02  4.116e-01 364.220  &lt; 2e-16 ***
+## countyfp107          1.377e+02  4.192e-01 328.496  &lt; 2e-16 ***
+## countyfp109          1.554e+02  4.077e-01 381.134  &lt; 2e-16 ***
+## countyfp111          1.322e+02  4.246e-01 311.307  &lt; 2e-16 ***
+## countyfp113          1.482e+02  4.131e-01 358.726  &lt; 2e-16 ***
+## countyfp115          1.402e+02  4.202e-01 333.690  &lt; 2e-16 ***
+## countyfp117          1.118e+02  4.327e-01 258.308  &lt; 2e-16 ***
+## countyfp119          1.501e+02  4.075e-01 368.254  &lt; 2e-16 ***
+## countyfp121          1.341e+02  4.201e-01 319.330  &lt; 2e-16 ***
+## countyfp123          1.439e+02  4.195e-01 343.125  &lt; 2e-16 ***
+## countyfp125          1.371e+02  4.194e-01 326.822  &lt; 2e-16 ***
+## countyfp127          1.557e+02  4.134e-01 376.537  &lt; 2e-16 ***
+## countyfp129          1.370e+02  4.363e-01 314.093  &lt; 2e-16 ***
+## countyfp131          1.514e+02  4.053e-01 373.528  &lt; 2e-16 ***
+## countyfp133          1.348e+02  4.179e-01 322.638  &lt; 2e-16 ***
+## countyfp135          1.191e+02  4.256e-01 279.774  &lt; 2e-16 ***
+## countyfp137          1.382e+02  4.240e-01 326.053  &lt; 2e-16 ***
+## countyfp139          1.442e+02  4.182e-01 344.787  &lt; 2e-16 ***
+## countyfp141          1.561e+02  4.089e-01 381.849  &lt; 2e-16 ***
+## countyfp143          1.514e+02  4.062e-01 372.753  &lt; 2e-16 ***
+## countyfp145          1.320e+02  4.260e-01 309.743  &lt; 2e-16 ***
+## countyfp147          1.496e+02  4.084e-01 366.259  &lt; 2e-16 ***
+## countyfp149          1.466e+02  4.123e-01 355.556  &lt; 2e-16 ***
+## countyfp151          1.531e+02  4.103e-01 373.133  &lt; 2e-16 ***
+## countyfp153          1.497e+02  4.169e-01 358.997  &lt; 2e-16 ***
+## countyfp155          1.446e+02  4.276e-01 338.072  &lt; 2e-16 ***
+## countyfp157          1.483e+02  4.148e-01 357.605  &lt; 2e-16 ***
+## countyfp159          1.146e+02  4.230e-01 270.966  &lt; 2e-16 ***
+## countyfp161          1.509e+02  4.126e-01 365.741  &lt; 2e-16 ***
+## countyfp163          1.563e+02  4.161e-01 375.743  &lt; 2e-16 ***
+## countyfp165          1.472e+02  4.188e-01 351.516  &lt; 2e-16 ***
+## countyfp167          1.557e+02  4.102e-01 379.565  &lt; 2e-16 ***
+## countyfp169          1.520e+02  4.145e-01 366.781  &lt; 2e-16 ***
+## countyfp171          1.507e+02  4.130e-01 364.907  &lt; 2e-16 ***
+## countyfp173          1.189e+02  4.287e-01 277.330  &lt; 2e-16 ***
+## countyfp175          1.237e+02  4.266e-01 289.888  &lt; 2e-16 ***
+## countyfp177          1.216e+02  4.241e-01 286.751  &lt; 2e-16 ***
+## countyfp179          1.293e+02  4.269e-01 302.929  &lt; 2e-16 ***
+## countyfp181          1.331e+02  4.194e-01 317.255  &lt; 2e-16 ***
+## countyfp183          1.443e+02  4.200e-01 343.544  &lt; 2e-16 ***
+## countyfp185          1.133e+02  4.275e-01 264.977  &lt; 2e-16 ***
+## countyfp187          1.558e+02  4.123e-01 378.033  &lt; 2e-16 ***
+## countyfp189          1.518e+02  4.059e-01 374.118  &lt; 2e-16 ***
+## countyfp191          1.486e+02  4.064e-01 365.556  &lt; 2e-16 ***
+## countyfp193          1.407e+02  4.149e-01 339.102  &lt; 2e-16 ***
+## countyfp195          1.500e+02  4.049e-01 370.526  &lt; 2e-16 ***
+## countyfp197          1.539e+02  4.092e-01 376.161  &lt; 2e-16 ***
+## tmax_sq:countyfp3   -1.659e-04  1.115e-03  -0.149   0.8818    
+## tmax_sq:countyfp5    6.862e-04  1.171e-03   0.586   0.5578    
+## tmax_sq:countyfp7   -1.092e-03  1.123e-03  -0.973   0.3307    
+## tmax_sq:countyfp9   -1.740e-04  1.125e-03  -0.155   0.8772    
+## tmax_sq:countyfp11  -3.414e-04  1.136e-03  -0.300   0.7639    
+## tmax_sq:countyfp13   1.309e-04  1.144e-03   0.114   0.9089    
+## tmax_sq:countyfp15   6.775e-05  1.121e-03   0.060   0.9518    
+## tmax_sq:countyfp17   2.040e-04  1.150e-03   0.177   0.8592    
+## tmax_sq:countyfp19   4.569e-04  1.154e-03   0.396   0.6923    
+## tmax_sq:countyfp21   8.829e-04  1.138e-03   0.776   0.4378    
+## tmax_sq:countyfp23  -1.328e-05  1.138e-03  -0.012   0.9907    
+## tmax_sq:countyfp25   6.621e-04  1.133e-03   0.584   0.5590    
+## tmax_sq:countyfp27   3.356e-04  1.125e-03   0.298   0.7655    
+## tmax_sq:countyfp29   2.467e-04  1.112e-03   0.222   0.8244    
+## tmax_sq:countyfp31  -1.560e-04  1.133e-03  -0.138   0.8905    
+## tmax_sq:countyfp33   2.119e-04  1.158e-03   0.183   0.8548    
+## tmax_sq:countyfp35   5.198e-04  1.129e-03   0.461   0.6451    
+## tmax_sq:countyfp37  -1.694e-05  1.164e-03  -0.015   0.9884    
+## tmax_sq:countyfp39   5.152e-04  1.122e-03   0.459   0.6460    
+## tmax_sq:countyfp41   2.172e-03  1.139e-03   1.907   0.0565 .  
+## tmax_sq:countyfp43   4.086e-04  1.162e-03   0.352   0.7251    
+## tmax_sq:countyfp45  -1.136e-03  1.135e-03  -1.001   0.3168    
+## tmax_sq:countyfp47   4.457e-04  1.128e-03   0.395   0.6926    
+## tmax_sq:countyfp49   1.015e-04  1.113e-03   0.091   0.9273    
+## tmax_sq:countyfp51  -2.455e-03  1.112e-03  -2.209   0.0272 *  
+## tmax_sq:countyfp53  -3.094e-04  1.121e-03  -0.276   0.7825    
+## tmax_sq:countyfp55  -5.258e-04  1.162e-03  -0.452   0.6510    
+## tmax_sq:countyfp57   3.398e-04  1.109e-03   0.306   0.7592    
+## tmax_sq:countyfp59   2.623e-03  1.149e-03   2.282   0.0225 *  
+## tmax_sq:countyfp61  -5.544e-04  1.166e-03  -0.476   0.6344    
+## tmax_sq:countyfp63   1.793e-03  1.156e-03   1.551   0.1209    
+## tmax_sq:countyfp65   9.779e-04  1.166e-03   0.839   0.4017    
+## tmax_sq:countyfp67  -3.379e-04  1.151e-03  -0.294   0.7691    
+## tmax_sq:countyfp69   1.069e-03  1.144e-03   0.935   0.3500    
+## tmax_sq:countyfp71   9.668e-04  1.080e-03   0.896   0.3705    
+## tmax_sq:countyfp73   1.424e-04  1.113e-03   0.128   0.8981    
+## tmax_sq:countyfp75   9.462e-04  1.141e-03   0.829   0.4071    
+## tmax_sq:countyfp77   2.046e-04  1.113e-03   0.184   0.8542    
+## tmax_sq:countyfp79   5.271e-04  1.128e-03   0.467   0.6404    
+## tmax_sq:countyfp81   5.660e-04  1.159e-03   0.488   0.6252    
+## tmax_sq:countyfp83   7.457e-04  1.132e-03   0.658   0.5102    
+## tmax_sq:countyfp85   3.194e-04  1.102e-03   0.290   0.7719    
+## tmax_sq:countyfp87   4.993e-04  1.106e-03   0.451   0.6517    
+## tmax_sq:countyfp89   6.885e-04  1.187e-03   0.580   0.5618    
+## tmax_sq:countyfp91   6.949e-04  1.150e-03   0.604   0.5458    
+## tmax_sq:countyfp93   1.965e-04  1.130e-03   0.174   0.8620    
+## tmax_sq:countyfp95  -2.750e-04  1.123e-03  -0.245   0.8066    
+## tmax_sq:countyfp97  -1.132e-03  1.148e-03  -0.986   0.3242    
+## tmax_sq:countyfp99   5.022e-04  1.121e-03   0.448   0.6542    
+## tmax_sq:countyfp101 -9.635e-04  1.094e-03  -0.881   0.3784    
+## tmax_sq:countyfp103 -4.843e-04  1.124e-03  -0.431   0.6664    
+## tmax_sq:countyfp105 -1.122e-03  1.144e-03  -0.981   0.3266    
+## tmax_sq:countyfp107 -8.411e-04  1.112e-03  -0.757   0.4492    
+## tmax_sq:countyfp109  1.418e-03  1.150e-03   1.233   0.2177    
+## tmax_sq:countyfp111 -7.665e-04  1.097e-03  -0.699   0.4846    
+## tmax_sq:countyfp113 -1.132e-03  1.140e-03  -0.994   0.3204    
+## tmax_sq:countyfp115  5.403e-04  1.104e-03   0.489   0.6245    
+## tmax_sq:countyfp117 -2.400e-04  1.131e-03  -0.212   0.8319    
+## tmax_sq:countyfp119 -9.879e-05  1.124e-03  -0.088   0.9300    
+## tmax_sq:countyfp121 -2.750e-05  1.117e-03  -0.025   0.9804    
+## tmax_sq:countyfp123 -5.103e-04  1.112e-03  -0.459   0.6463    
+## tmax_sq:countyfp125  6.080e-04  1.111e-03   0.547   0.5843    
+## tmax_sq:countyfp127  2.956e-04  1.137e-03   0.260   0.7948    
+## tmax_sq:countyfp129  1.062e-03  1.101e-03   0.965   0.3344    
+## tmax_sq:countyfp131 -3.182e-04  1.175e-03  -0.271   0.7865    
+## tmax_sq:countyfp133 -9.747e-05  1.095e-03  -0.089   0.9291    
+## tmax_sq:countyfp135 -7.682e-04  1.122e-03  -0.685   0.4935    
+## tmax_sq:countyfp137  8.693e-04  1.100e-03   0.790   0.4294    
+## tmax_sq:countyfp139  4.520e-04  1.113e-03   0.406   0.6847    
+## tmax_sq:countyfp141  1.386e-03  1.137e-03   1.219   0.2230    
+## tmax_sq:countyfp143  2.384e-03  1.152e-03   2.071   0.0384 *  
+## tmax_sq:countyfp145  3.812e-04  1.101e-03   0.346   0.7292    
+## tmax_sq:countyfp147  1.752e-03  1.141e-03   1.536   0.1244    
+## tmax_sq:countyfp149 -1.192e-03  1.114e-03  -1.070   0.2847    
+## tmax_sq:countyfp151  1.168e-03  1.132e-03   1.032   0.3022    
+## tmax_sq:countyfp153  1.128e-03  1.110e-03   1.016   0.3098    
+## tmax_sq:countyfp155  9.261e-04  1.111e-03   0.834   0.4045    
+## tmax_sq:countyfp157  1.297e-04  1.121e-03   0.116   0.9079    
+## tmax_sq:countyfp159  3.043e-04  1.116e-03   0.273   0.7852    
+## tmax_sq:countyfp161  4.567e-04  1.134e-03   0.403   0.6872    
+## tmax_sq:countyfp163 -6.772e-04  1.129e-03  -0.600   0.5487    
+## tmax_sq:countyfp165  5.073e-05  1.123e-03   0.045   0.9640    
+## tmax_sq:countyfp167 -4.368e-04  1.119e-03  -0.391   0.6962    
+## tmax_sq:countyfp169  1.086e-03  1.134e-03   0.957   0.3384    
+## tmax_sq:countyfp171  7.259e-04  1.136e-03   0.639   0.5228    
+## tmax_sq:countyfp173  1.294e-04  1.117e-03   0.116   0.9078    
+## tmax_sq:countyfp175  1.351e-04  1.124e-03   0.120   0.9043    
+## tmax_sq:countyfp177 -9.667e-04  1.087e-03  -0.890   0.3737    
+## tmax_sq:countyfp179 -1.556e-03  1.113e-03  -1.398   0.1621    
+## tmax_sq:countyfp181  6.363e-04  1.112e-03   0.572   0.5671    
+## tmax_sq:countyfp183  9.294e-05  1.106e-03   0.084   0.9330    
+## tmax_sq:countyfp185 -5.689e-04  1.126e-03  -0.505   0.6134    
+## tmax_sq:countyfp187  5.896e-04  1.135e-03   0.520   0.6033    
+## tmax_sq:countyfp189  1.231e-03  1.163e-03   1.059   0.2897    
+## tmax_sq:countyfp191  5.694e-04  1.177e-03   0.484   0.6286    
+## tmax_sq:countyfp193 -1.469e-04  1.110e-03  -0.132   0.8947    
+## tmax_sq:countyfp195  2.437e-04  1.177e-03   0.207   0.8359    
+## tmax_sq:countyfp197  9.200e-04  1.140e-03   0.807   0.4197    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 33.14 on 1368712 degrees of freedom
+##   (8248 observations deleted due to missingness)
+## Multiple R-squared:  0.9501, Adjusted R-squared:  0.9501 
+## F-statistic: 1.31e+05 on 199 and 1368712 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="corn-and-weather-data-analysis.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot is breaking my html, but this code generates it.</span></span>
+<span id="cb41-2"><a href="corn-and-weather-data-analysis.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(m4, which = 1)</span></span></code></pre></div>
+<p>The model with county code as a factor still has the temperature terms as highly significant, just with differences in degree between counties.</p>
+</div>
+<div id="q5-3" class="section level3" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Q5</h3>
+<p>Soybeans: Download NASS data on soybean yields and explore either a time series relationship for a given county, the cross-sectional relationship for a given year, or a panel across all counties and years.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="corn-and-weather-data-analysis.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters to query on </span></span>
+<span id="cb42-2"><a href="corn-and-weather-data-analysis.html#cb42-2" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">commodity_desc =</span> <span class="st">&quot;SOYBEANS&quot;</span>, <span class="at">prodn_practice_desc =</span> <span class="st">&quot;ALL PRODUCTION PRACTICES&quot;</span>, <span class="at">year__GE =</span> <span class="dv">1981</span>, <span class="at">state_alpha =</span> <span class="st">&quot;IA&quot;</span>)</span>
+<span id="cb42-3"><a href="corn-and-weather-data-analysis.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="corn-and-weather-data-analysis.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># download</span></span>
+<span id="cb42-5"><a href="corn-and-weather-data-analysis.html#cb42-5" aria-hidden="true" tabindex="-1"></a>soyyieldsall <span class="ot">&lt;-</span> <span class="fu">nassqs_yields</span>(params)</span></code></pre></div>
+<pre><code>## 
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |=                                                                     |   1%
+  |                                                                            
+  |=                                                                     |   2%
+  |                                                                            
+  |==                                                                    |   2%
+  |                                                                            
+  |==                                                                    |   3%
+  |                                                                            
+  |===                                                                   |   4%
+  |                                                                            
+  |===                                                                   |   5%
+  |                                                                            
+  |====                                                                  |   5%
+  |                                                                            
+  |====                                                                  |   6%
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |=====                                                                 |   8%
+  |                                                                            
+  |======                                                                |   8%
+  |                                                                            
+  |======                                                                |   9%
+  |                                                                            
+  |=======                                                               |   9%
+  |                                                                            
+  |=======                                                               |  10%
+  |                                                                            
+  |=======                                                               |  11%
+  |                                                                            
+  |========                                                              |  11%
+  |                                                                            
+  |========                                                              |  12%
+  |                                                                            
+  |=========                                                             |  12%
+  |                                                                            
+  |=========                                                             |  13%
+  |                                                                            
+  |==========                                                            |  14%
+  |                                                                            
+  |==========                                                            |  15%
+  |                                                                            
+  |===========                                                           |  15%
+  |                                                                            
+  |===========                                                           |  16%
+  |                                                                            
+  |============                                                          |  16%
+  |                                                                            
+  |============                                                          |  17%
+  |                                                                            
+  |============                                                          |  18%
+  |                                                                            
+  |=============                                                         |  18%
+  |                                                                            
+  |=============                                                         |  19%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |==============                                                        |  21%
+  |                                                                            
+  |===============                                                       |  21%
+  |                                                                            
+  |===============                                                       |  22%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |================                                                      |  23%
+  |                                                                            
+  |=================                                                     |  24%
+  |                                                                            
+  |=================                                                     |  25%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |==================                                                    |  26%
+  |                                                                            
+  |===================                                                   |  27%
+  |                                                                            
+  |===================                                                   |  28%
+  |                                                                            
+  |====================                                                  |  28%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=====================                                                 |  29%
+  |                                                                            
+  |=====================                                                 |  30%
+  |                                                                            
+  |======================                                                |  31%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |=======================                                               |  33%
+  |                                                                            
+  |========================                                              |  34%
+  |                                                                            
+  |========================                                              |  35%
+  |                                                                            
+  |=========================                                             |  35%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |==========================                                            |  37%
+  |                                                                            
+  |==========================                                            |  38%
+  |                                                                            
+  |===========================                                           |  38%
+  |                                                                            
+  |===========================                                           |  39%
+  |                                                                            
+  |============================                                          |  39%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |=============================                                         |  41%
+  |                                                                            
+  |=============================                                         |  42%
+  |                                                                            
+  |==============================                                        |  42%
+  |                                                                            
+  |==============================                                        |  43%
+  |                                                                            
+  |===============================                                       |  44%
+  |                                                                            
+  |===============================                                       |  45%
+  |                                                                            
+  |================================                                      |  45%
+  |                                                                            
+  |================================                                      |  46%
+  |                                                                            
+  |=================================                                     |  47%
+  |                                                                            
+  |==================================                                    |  48%
+  |                                                                            
+  |==================================                                    |  49%
+  |                                                                            
+  |===================================                                   |  49%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================                                  |  51%
+  |                                                                            
+  |====================================                                  |  52%
+  |                                                                            
+  |=====================================                                 |  52%
+  |                                                                            
+  |=====================================                                 |  53%
+  |                                                                            
+  |======================================                                |  54%
+  |                                                                            
+  |======================================                                |  55%
+  |                                                                            
+  |=======================================                               |  55%
+  |                                                                            
+  |=======================================                               |  56%
+  |                                                                            
+  |========================================                              |  57%
+  |                                                                            
+  |========================================                              |  58%
+  |                                                                            
+  |=========================================                             |  58%
+  |                                                                            
+  |=========================================                             |  59%
+  |                                                                            
+  |==========================================                            |  59%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |===========================================                           |  61%
+  |                                                                            
+  |===========================================                           |  62%
+  |                                                                            
+  |============================================                          |  62%
+  |                                                                            
+  |============================================                          |  63%
+  |                                                                            
+  |============================================                          |  64%
+  |                                                                            
+  |=============================================                         |  64%
+  |                                                                            
+  |=============================================                         |  65%
+  |                                                                            
+  |==============================================                        |  65%
+  |                                                                            
+  |==============================================                        |  66%
+  |                                                                            
+  |===============================================                       |  67%
+  |                                                                            
+  |===============================================                       |  68%
+  |                                                                            
+  |================================================                      |  68%
+  |                                                                            
+  |================================================                      |  69%
+  |                                                                            
+  |=================================================                     |  69%
+  |                                                                            
+  |=================================================                     |  70%
+  |                                                                            
+  |=================================================                     |  71%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |==================================================                    |  72%
+  |                                                                            
+  |===================================================                   |  72%
+  |                                                                            
+  |===================================================                   |  73%
+  |                                                                            
+  |===================================================                   |  74%
+  |                                                                            
+  |====================================================                  |  74%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |=====================================================                 |  75%
+  |                                                                            
+  |=====================================================                 |  76%
+  |                                                                            
+  |======================================================                |  77%
+  |                                                                            
+  |======================================================                |  78%
+  |                                                                            
+  |=======================================================               |  78%
+  |                                                                            
+  |=======================================================               |  79%
+  |                                                                            
+  |========================================================              |  79%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |=========================================================             |  81%
+  |                                                                            
+  |=========================================================             |  82%
+  |                                                                            
+  |==========================================================            |  82%
+  |                                                                            
+  |==========================================================            |  83%
+  |                                                                            
+  |===========================================================           |  84%
+  |                                                                            
+  |===========================================================           |  85%
+  |                                                                            
+  |============================================================          |  85%
+  |                                                                            
+  |============================================================          |  86%
+  |                                                                            
+  |=============================================================         |  87%
+  |                                                                            
+  |=============================================================         |  88%
+  |                                                                            
+  |==============================================================        |  88%
+  |                                                                            
+  |==============================================================        |  89%
+  |                                                                            
+  |===============================================================       |  89%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
+  |===============================================================       |  91%
+  |                                                                            
+  |================================================================      |  91%
+  |                                                                            
+  |================================================================      |  92%
+  |                                                                            
+  |=================================================================     |  92%
+  |                                                                            
+  |=================================================================     |  93%
+  |                                                                            
+  |==================================================================    |  94%
+  |                                                                            
+  |==================================================================    |  95%
+  |                                                                            
+  |===================================================================   |  95%
+  |                                                                            
+  |===================================================================   |  96%
+  |                                                                            
+  |====================================================================  |  97%
+  |                                                                            
+  |====================================================================  |  98%
+  |                                                                            
+  |===================================================================== |  98%
+  |                                                                            
+  |===================================================================== |  99%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="corn-and-weather-data-analysis.html#cb44-1" aria-hidden="true" tabindex="-1"></a>soyyieldsall<span class="sc">$</span>county_ansi <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(soyyieldsall<span class="sc">$</span>county_ansi)</span>
+<span id="cb44-2"><a href="corn-and-weather-data-analysis.html#cb44-2" aria-hidden="true" tabindex="-1"></a>soyyieldsall<span class="sc">$</span>yield <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(soyyieldsall<span class="sc">$</span>Value)</span>
+<span id="cb44-3"><a href="corn-and-weather-data-analysis.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="corn-and-weather-data-analysis.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># clean and filter this dataset</span></span>
+<span id="cb44-5"><a href="corn-and-weather-data-analysis.html#cb44-5" aria-hidden="true" tabindex="-1"></a>soyyields <span class="ot">&lt;-</span> <span class="fu">select</span>(soyyieldsall, county_ansi, county_name, yield, year) <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="corn-and-weather-data-analysis.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(county_ansi) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(yield))</span>
+<span id="cb44-7"><a href="corn-and-weather-data-analysis.html#cb44-7" aria-hidden="true" tabindex="-1"></a>soyyields <span class="ot">&lt;-</span> <span class="fu">tibble</span>(soyyields)</span>
+<span id="cb44-8"><a href="corn-and-weather-data-analysis.html#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="corn-and-weather-data-analysis.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to buena vista county</span></span>
+<span id="cb44-10"><a href="corn-and-weather-data-analysis.html#cb44-10" aria-hidden="true" tabindex="-1"></a>buena_soy <span class="ot">&lt;-</span> soyyields <span class="sc">%&gt;%</span></span>
+<span id="cb44-11"><a href="corn-and-weather-data-analysis.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county_name <span class="sc">==</span> <span class="st">&#39;BUENA VISTA&#39;</span>)</span>
+<span id="cb44-12"><a href="corn-and-weather-data-analysis.html#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="corn-and-weather-data-analysis.html#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(buena_soy, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> yield))<span class="sc">+</span></span>
+<span id="cb44-14"><a href="corn-and-weather-data-analysis.html#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb44-15"><a href="corn-and-weather-data-analysis.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb44-16"><a href="corn-and-weather-data-analysis.html#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Year&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Corn Yield (T)&#39;</span>, <span class="at">title=</span> <span class="st">&#39;Corn Yields in Buena Vista County&#39;</span>)</span></code></pre></div>
+<p><img src="bookdown-start_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="corn-and-weather-data-analysis.html#cb45-1" aria-hidden="true" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> buena_soy, yield<span class="sc">~</span>year)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lagos-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
