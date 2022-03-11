@@ -16,6 +16,9 @@ library(rnassqs)
 
 # Corn and Weather Data Analysis
 
+In this assignment we learned about model creation in R. Using data from PRISM
+and NASS we created a series of models relating crop yields to temperature trends.
+
 ## Loading in data
 
 ### Load the PRISM daily maximum temperatures

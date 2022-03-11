@@ -22,6 +22,10 @@ library(kableExtra)
 
 # LAGOS Analysis
 
+In this assignment we built on our basic spatial skills from the previous chapter.
+Using the LAGOS dataset we performed more a more complex analysis on how chlorophyll-A
+and water clarity are related. 
+
 
 ## Loading in data
 

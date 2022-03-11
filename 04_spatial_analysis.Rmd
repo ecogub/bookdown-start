@@ -21,6 +21,8 @@ library(USAboundaries) #USA states and counties
 
 # Beginner LAGOS Analysis
 
+In this assignment we learned how to perform spatial analyses in R. Using data
+from LAGOS, we practiced joining, filtering, mapping, and querying spatial data.
 
 ## Loading in data
 

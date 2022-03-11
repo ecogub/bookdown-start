@@ -22,6 +22,10 @@ library(revealjs)
 ```
 # R markdown Examples
 
+The first activity in the class was to create this basic R markdown document. The
+document uses several handy features from markdown, including italics, bolding, and 
+hyperlinking. In the 'Methods' section, Matt demos how to use some of these skills.
+
 ## Methods
 
 The Poudre River at Lincoln Bridge is:

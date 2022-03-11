@@ -19,9 +19,13 @@ library(Rcpp)
 
 # Snow Data
 
+In this assignment, we learned how to perform some basic web scraping. We practiced
+writing http request to the Center for Snow and Avalanche Studies' online database.
+Then we used the data to make some simple exploratory plots.
+
 ## Simple web scraping
 
-R can read html using either rvest, xml, or xml2 packages. Here we are going to navigate to the Center for Snow and Avalance Studies  [Website](https://snowstudies.org/archived-data/) and read a table in. This table contains links to data we want to programatically download for three sites. We don't know much about these sites, but they contain incredibly rich snow, temperature, and precip data. 
+R can read html using either rvest, xml, or xml2 packages. Here we are going to navigate to the Center for Snow and Avalanche Studies  [Website](https://snowstudies.org/archived-data/) and read a table in. This table contains links to data we want to programatically download for three sites. We don't know much about these sites, but they contain incredibly rich snow, temperature, and precip data. 
 
 
 ### Reading an html 

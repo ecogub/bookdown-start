@@ -22,6 +22,10 @@ knitr::opts_knit$set(root.dir='..')
 
 # Hayman Fire Recovery
 
+In this assignment, we applied our R skills to perform a simple analysis on aggregated 
+data from the Hayman fire. This focuses mostly on demonstrating competency with
+tidyverse data manipulation functions such as 'group_by()' and 'summarize()'.
+
 ## Loading in data
 
 ```{r dataread, warning=F,message=F}
